@@ -38,9 +38,44 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
-}
+				const exprArr = Array.from(expr)
+				const newExprArr =[]
+				const codeSymbol = []
+				
+				const arrObj = Object.entries(MORSE_TABLE);
+				const strArr = []
+				
+				for (let i=0; i<exprArr.length; i+=10){
+					newExprArr.push(exprArr.slice(i, i+10))
+				}
+				
+				const codeArr = newExprArr.forEach((el,i)=>{
+					
+					let codeString = ''
+					let exprString = ''
+					for (let j=0; j<el.length; j+=2){
+						let codeNumber = el[j]+el[j+1]
+						if (codeNumber === '10'){
+							codeString += '.'
+						}else if ( codeNumber === '11'){
+							codeString += '-'
+						} 
+						
+					}  strArr.push(codeString);
+					
+					 
+					});
+					const newString = strArr.map(str => {
+						if (MORSE_TABLE[str]){
+							return MORSE_TABLE[str]
+						} return " "
+						
+					}).join('')
+					return newString
+				}
 
 module.exports = {
     decode
 }
+
+const expr = "00101010100000000010001011101000101110100000111111**********00001011110000111111000010111000101110100000111010"
